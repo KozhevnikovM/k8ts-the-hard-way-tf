@@ -18,7 +18,7 @@ resource "aws_lb_target_group_attachment" "kubernetes" {
   count = length(aws_instance.controller)
 
   target_group_arn = aws_lb_target_group.kubernetes.arn
-  target_id        = aws_instance.controller[count.index].id
+  target_id        = aws_instance.controller[count.index].private_ip
 
 }
 
