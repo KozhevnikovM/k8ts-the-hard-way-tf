@@ -46,7 +46,7 @@ resource "aws_security_group" "kubernetes" {
     description = "Allow internal all"
     protocol    = "all"
     from_port   = 0
-    to_port     = 65535
+    to_port     = 0
     cidr_blocks = [aws_vpc.vpc.cidr_block, "10.200.0.0/16"]
   }
 
