@@ -42,7 +42,7 @@ resource "aws_instance" "controller" {
   user_data                   = "name=controller-${count.index}"
   subnet_id                   = aws_subnet.kubernetes.id
 
-  ebs_block_device {
+  root_block_device {
     device_name = "/dev/sda1"
     volume_size = "50"
 
@@ -67,7 +67,7 @@ resource "aws_instance" "worker" {
   user_data                   = "name=worker-${count.index}|pod-cidr=10.200.${count.index}.0/24"
   subnet_id                   = aws_subnet.kubernetes.id
 
-  ebs_block_device {
+  root_block_device {
     device_name = "/dev/sda1"
     volume_size = "50"
 
