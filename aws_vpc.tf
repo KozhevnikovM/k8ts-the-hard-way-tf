@@ -50,6 +50,7 @@ resource "aws_security_group" "kubernetes" {
   }
 
   ingress {
+    description = "Allow SSH"
     protocol    = "tcp"
     from_port   = 22
     to_port     = 22
@@ -57,6 +58,7 @@ resource "aws_security_group" "kubernetes" {
   }
 
   ingress {
+    description = "Allow https"
     protocol    = "tcp"
     from_port   = 443
     to_port     = 443
@@ -64,6 +66,7 @@ resource "aws_security_group" "kubernetes" {
   }
 
   ingress {
+    description = "Allow 6443"
     protocol    = "tcp"
     from_port   = 6443
     to_port     = 6443
@@ -71,6 +74,7 @@ resource "aws_security_group" "kubernetes" {
   }
 
   ingress {
+    description = "Allow ping"
     protocol    = "icmp"
     from_port   = -1
     to_port     = -1
