@@ -1,5 +1,6 @@
 data "aws_ami" "ubuntu" {
   most_recent = true
+  
 
   filter {
     name   = "name"
@@ -36,7 +37,7 @@ resource "aws_instance" "controller" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t3.micro"
   key_name                    = aws_key_pair.tf-k8s.key_name
-  security_groups             = [aws_security_group.kubernetes.id]
+  vpc_security_group_ids      = [aws_security_group.kubernetes.id]
   private_ip                  = "10.0.1.1${count.index}"
   user_data                   = "name=controller-${count.index}"
   subnet_id                   = aws_subnet.kubernetes.id
@@ -61,7 +62,7 @@ resource "aws_instance" "worker" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t3.micro"
   key_name                    = aws_key_pair.tf-k8s.key_name
-  security_groups             = [aws_security_group.kubernetes.id]
+  vpc_security_group_ids      = [aws_security_group.kubernetes.id]
   private_ip                  = "10.0.1.2${count.index}"
   user_data                   = "name=worker-${count.index}|pod-cidr=10.200.${count.index}.0/24"
   subnet_id                   = aws_subnet.kubernetes.id
