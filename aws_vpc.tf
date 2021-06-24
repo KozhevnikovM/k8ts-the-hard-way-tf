@@ -43,6 +43,7 @@ resource "aws_security_group" "kubernetes" {
   vpc_id = aws_vpc.vpc.id
 
   ingress {
+    description = "Allow internal all"
     protocol    = "all"
     from_port   = 0
     to_port     = 65535
