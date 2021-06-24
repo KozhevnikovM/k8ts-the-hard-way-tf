@@ -35,7 +35,7 @@ resource "aws_instance" "controller" {
   associate_public_ip_address = true
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t3.micro"
-  key_name                    = "kubernetes"
+  key_name                    = aws_key_pair.tf-k8s.key_name
   security_groups             = [aws_security_group.kubernetes.id]
   private_ip                  = "10.0.1.1${count.index}"
   user_data                   = "name=controller-${count.index}"
@@ -60,7 +60,7 @@ resource "aws_instance" "worker" {
   associate_public_ip_address = true
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t3.micro"
-  key_name                    = "kubernetes"
+  key_name                    = aws_key_pair.tf-k8s.key_name
   security_groups             = [aws_security_group.kubernetes.id]
   private_ip                  = "10.0.1.2${count.index}"
   user_data                   = "name=worker-${count.index}|pod-cidr=10.200.${count.index}.0/24"
