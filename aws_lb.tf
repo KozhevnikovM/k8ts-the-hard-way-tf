@@ -24,7 +24,7 @@ resource "aws_lb_target_group_attachment" "kubernetes" {
 
 resource "aws_lb_listener" "kubernetes" {
   load_balancer_arn = aws_lb.kubernetes.arn
-  protocol          = "tcp"
+  protocol          = "TCP"
   port              = 443
 
   default_action {
