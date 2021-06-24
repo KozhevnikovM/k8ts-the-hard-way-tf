@@ -43,9 +43,7 @@ resource "aws_instance" "controller" {
   subnet_id                   = aws_subnet.kubernetes.id
 
   root_block_device {
-    device_name = "/dev/sda1"
     volume_size = "50"
-
   }
 
   tags = {
@@ -68,9 +66,7 @@ resource "aws_instance" "worker" {
   subnet_id                   = aws_subnet.kubernetes.id
 
   root_block_device {
-    device_name = "/dev/sda1"
     volume_size = "50"
-
   }
 
   tags = {
