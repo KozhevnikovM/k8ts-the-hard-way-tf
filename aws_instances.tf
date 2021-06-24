@@ -26,9 +26,14 @@ data "aws_ami" "ubuntu" {
 
 }
 
+resource "tls_private_key" "key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 resource "aws_key_pair" "tf-k8s" {
-  key_name   = "terraform-k8s"
-  public_key = var.ssh_pub_key
+  key_name   = "tf-k8s"
+  public_key = tls_private_key.key.public_key_openssh
 }
 
 resource "aws_instance" "controller" {
